@@ -474,10 +474,10 @@ class WorkerBridge(worker_interface.WorkerBridge):
                 self.share_received.happened(bitcoin_data.target_to_average_attempts(share.target), not on_time, share.hash)
             if pow_hash > target:
                 print 'Worker %s submitted share with hash > target:' % (user,)
-                print '    Hash                     : %56x' % (pow_hash,)
-                print 'tes_hash                     : %56x' % (tes_hash,)
-                print '    Target                   : %56x' % (target,)
-                print '    share_info[bits].target  : %56x' % (share_info['bits'].target,)
+                # print '    Hash                     : %56x' % (pow_hash,)
+                # print 'tes_hash                     : %56x' % (tes_hash,)
+                # print '    Target                   : %56x' % (target,)
+                # print '    share_info[bits].target  : %56x' % (share_info['bits'].target,)
             elif header_hash in received_header_hashes:
                 print >>sys.stderr, 'Worker %s submitted share more than once!' % (user,)
             else:
