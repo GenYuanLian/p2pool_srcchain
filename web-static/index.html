@@ -60,7 +60,8 @@
 				    var arr = []; for(var i in pays) arr.push(i); arr.sort(function(a, b){return pays[b] - pays[a]});
 				    
 				    var tr = d3.select('#payouts').selectAll().data(arr).enter().append('tr');
-				    tr.append('td').append('a').text(function(addr){return addr}).attr('href', function(addr){return currency_info.address_explorer_url_prefix + addr});
+//				    tr.append('td').append('a').text(function(addr){return addr}).attr('href', function(addr){return currency_info.address_explorer_url_prefix + addr});
+					tr.append('td').text(function (addr) {return addr});
 				    tr.append('td').text(function(addr){return pays[addr]});
 				    
 				    var total_tr = d3.select('#payouts').append('tr');
@@ -72,7 +73,8 @@
 				    var tr = d3.select('#blocks').selectAll().data(blocks).enter().append('tr');
 				    tr.append('td').text(function(block){return block.number});
 				    tr.append('td').text(function(block){return new Date(1000*block.ts).toString()});
-				    tr.append('td').append('a').text(function(block){return block.hash}).attr('href', function(block){return currency_info.block_explorer_url_prefix + block.hash});
+				    tr.append('td').text(function (block) {return block.hash});
+//				    tr.append('td').append('a').text(function(block){return block.hash}).attr('href', function(block){return currency_info.block_explorer_url_prefix + block.hash});
 				    tr.append('td').append('a').text('→').attr('href', function(block){return 'share.html#' + block.share});
 				});
 			    });
@@ -348,8 +350,8 @@
 	<div style="border-bottom: 1px solid #ddd;"></div>
 	<center>
         <tt>P2Pool version: <span id="version"></span></tt><br/>
-		<tt>Interface by hardcpp <a href="https://github.com/hardcpp/P2PoolExtendedFrontEnd">https://github.com/hardcpp/P2PoolExtendedFrontEnd</a></tt><br/>
-		<tt>Donate if you love it (LTC LdKxw2JewLdo1atDsQ33LiCG9ZUDQ4XmPb) (BTC 1FBa12SPET7YRGHoTXyawp1EBJyFPzju31)</tt>
+		<!--<tt>Interface by hardcpp <a href="https://github.com/hardcpp/P2PoolExtendedFrontEnd">https://github.com/hardcpp/P2PoolExtendedFrontEnd</a></tt><br/>-->
+		<!--<tt>Donate if you love it (LTC LdKxw2JewLdo1atDsQ33LiCG9ZUDQ4XmPb) (BTC 1FBa12SPET7YRGHoTXyawp1EBJyFPzju31)</tt>-->
 	</center>
 		<br/>
 		<script type="text/javascript">

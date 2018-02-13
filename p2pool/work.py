@@ -51,11 +51,6 @@ class WorkerBridge(worker_interface.WorkerBridge):
 
         self.address_throttle = 0
 
-        # DONATION_SCRIPT = '4104ffd03de44a6e11b9917f3a29f9443283d9871c9d743ef30d5eddcd37094b64d1b3d8090496b53256786bf5c82932ec23c3b74d9f05a6f95a8b5529352656664bac'.decode('hex')
-        # print data.script2_to_address(DONATION_SCRIPT, node.net.PARENT)
-        # print data.address_to_pubkey_hash("1E482inuE9GckE6kXoX5sBCTD7g4rgGgfN",node.net.PARENT)
-
-
         self.tracker_view = forest.TrackerView(self.node.tracker, forest.get_attributedelta_type(dict(forest.AttributeDelta.attrs,
             my_count=lambda share: 1 if share.hash in self.my_share_hashes else 0,
             my_doa_count=lambda share: 1 if share.hash in self.my_doa_share_hashes else 0,
