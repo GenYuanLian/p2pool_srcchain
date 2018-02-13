@@ -36,7 +36,7 @@
 	    <link href="css/bootstrap-responsive.css" rel="stylesheet">
         <script type="text/javascript">
             // based on goblin's p2pool-stats project
-			var period = "day";
+			var period = "hour";
 
 			function LoadData()
 			{
@@ -643,7 +643,8 @@
 		<script type="text/javascript">
 		$(document).ready(function() {
 			LoadData();
-		  	UpdateData();
+//		  	UpdateData();
+            ChangeCurrentPeriod('hour','scale1');
 			setInterval("AutoRefresh()", 5 * 1000);
 		    	$('#myTab a:first').tab('show');
 		});

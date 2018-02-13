@@ -13,9 +13,11 @@ eg.
 
 Running P2Pool:
 -------------------------
-To use P2Pool, you must be running your own local bitcoind. For standard
+To use P2Pool, you must be running your own local srcchaind. For standard
 configurations, using P2Pool should be as simple as:
 
+    cd Lyra2Z
+    python setup.py install
     python run_p2pool.py --bitcoind-config-path=/your/sourcechain/configfile/path
 
 Then run your miner program, connecting to 127.0.0.1 on port 9332 with any
