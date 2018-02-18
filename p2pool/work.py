@@ -373,7 +373,8 @@ class WorkerBridge(worker_interface.WorkerBridge):
         
         ba = dict(
             #version=max(self.current_work.value['version'], 0x20000000),
-            version=max(self.current_work.value['version'], 0x80000000),
+            #version=max(self.current_work.value['version'], 0x80000000),
+            version=max(self.current_work.value['version'], 0xA0000000),
             previous_block=self.current_work.value['previous_block'],
             merkle_link=merkle_link,
             coinb1=packed_gentx[:-self.COINBASE_NONCE_LENGTH-4],
