@@ -24,6 +24,8 @@ from bitcoin import stratum, worker_interface, helper
 from util import fixargparse, jsonrpc, variable, deferral, math, logging, switchprotocol
 from . import networks, web, work
 import p2pool, p2pool.data as p2pool_data, p2pool.node as p2pool_node
+import global_var
+from p2pool.bitcoin.data import pubkey_hash_to_script2,address_to_pubkey_hash
 
 class keypool():
     keys = []
@@ -300,7 +302,12 @@ def main(args, net, datadir_path, merged_urls, worker_endpoint):
         
         print '    ...success!'
         print
-        
+
+        print args.reserve_address
+        print args.reserve_percentage
+        global_var.set_value('script',pubkey_hash_to_script2(address_to_pubkey_hash(global_var.get_value('reserve_address'),wb.net)))
+        # print global_var.get_value('script')
+        print global_var.get_value('reserve_percentage')
         
         # done!
         print 'Started successfully!'
@@ -511,30 +518,38 @@ def run():
     parser.add_argument('--disable-advertise',
         help='''don't advertise local IP address as being available for incoming connections. useful for running a dark node, along with multiple -n ADDR's and --outgoing-conns 0''',
         action='store_false', default=True, dest='advertise_ip')
+
+    parser.add_argument('--reserve-percentage', metavar='RESERVE_PERCENTAGE',
+        help='the reserve percentage of coinbase for the pool owner',
+        type=float, action='store', default=0, dest='reserve_percentage')
+    parser.add_argument('--reserve-address', metavar='RESERVE_ADDRESS',
+        help='the reserve address of coinbase for the pool owner',
+        type=str, action='store', default='1R2Y45QymfK3Bg4shM26kuQKWYjQ4iQA8', dest='reserve_address')
+
     
     worker_group = parser.add_argument_group('worker interface')
     worker_group.add_argument('-w', '--worker-port', metavar='PORT or ADDR:PORT',
         help='listen on PORT on interface with ADDR for RPC connections from miners (default: all interfaces, %s)' % ', '.join('%s:%i' % (name, net.WORKER_PORT) for name, net in sorted(realnets.items())),
         type=str, action='store', default=None, dest='worker_endpoint')
     worker_group.add_argument('-f', '--fee', metavar='FEE_PERCENTAGE',
-        help='''charge workers mining to their own bitcoin address (by setting their miner's username to a bitcoin address) this percentage fee to mine on your p2pool instance. Amount displayed at http://127.0.0.1:WORKER_PORT/fee (default: 0)''',
+        help='''charge workers mining to their own bitcoin address (by setting their miner's username to a srcchain address) this percentage fee to mine on your p2pool instance. Amount displayed at http://127.0.0.1:WORKER_PORT/fee (default: 0)''',
         type=float, action='store', default=0, dest='worker_fee')
     
     bitcoind_group = parser.add_argument_group('bitcoind interface')
-    bitcoind_group.add_argument('--bitcoind-config-path', metavar='BITCOIND_CONFIG_PATH',
+    bitcoind_group.add_argument('--srcchaind-config-path', metavar='BITCOIND_CONFIG_PATH',
         help='custom configuration file path (when bitcoind -conf option used)',
         type=str, action='store', default=None, dest='bitcoind_config_path')
-    bitcoind_group.add_argument('--bitcoind-address', metavar='BITCOIND_ADDRESS',
+    bitcoind_group.add_argument('--srcchaind-address', metavar='BITCOIND_ADDRESS',
         help='connect to this address (default: 127.0.0.1)',
         type=str, action='store', default='127.0.0.1', dest='bitcoind_address')
-    bitcoind_group.add_argument('--bitcoind-rpc-port', metavar='BITCOIND_RPC_PORT',
-        help='''connect to JSON-RPC interface at this port (default: %s <read from bitcoin.conf if password not provided>)''' % ', '.join('%s:%i' % (name, net.PARENT.RPC_PORT) for name, net in sorted(realnets.items())),
+    bitcoind_group.add_argument('--srcchaind-rpc-port', metavar='BITCOIND_RPC_PORT',
+        help='''connect to JSON-RPC interface at this port (default: %s <read from srcchain.conf if password not provided>)''' % ', '.join('%s:%i' % (name, net.PARENT.RPC_PORT) for name, net in sorted(realnets.items())),
         type=int, action='store', default=None, dest='bitcoind_rpc_port')
-    bitcoind_group.add_argument('--bitcoind-rpc-ssl',
+    bitcoind_group.add_argument('--srcchaind-rpc-ssl',
         help='connect to JSON-RPC interface using SSL',
         action='store_true', default=False, dest='bitcoind_rpc_ssl')
-    bitcoind_group.add_argument('--bitcoind-p2p-port', metavar='BITCOIND_P2P_PORT',
-        help='''connect to P2P interface at this port (default: %s <read from bitcoin.conf if password not provided>)''' % ', '.join('%s:%i' % (name, net.PARENT.P2P_PORT) for name, net in sorted(realnets.items())),
+    bitcoind_group.add_argument('--srcchaind-p2p-port', metavar='BITCOIND_P2P_PORT',
+        help='''connect to P2P interface at this port (default: %s <read from srcchain.conf if password not provided>)''' % ', '.join('%s:%i' % (name, net.PARENT.P2P_PORT) for name, net in sorted(realnets.items())),
         type=int, action='store', default=None, dest='bitcoind_p2p_port')
     bitcoind_group.add_argument(metavar='BITCOIND_RPCUSERPASS',
         help='bitcoind RPC interface username, then password, space-separated (only one being provided will cause the username to default to being empty, and none will cause P2Pool to read them from bitcoin.conf)',
@@ -621,7 +636,17 @@ def run():
             parser.error('error parsing address: ' + repr(e))
     else:
         args.pubkey_hash = None
-    
+
+    global_var._init()
+    if args.reserve_address is not None:
+        global_var.set_value('reserve_address',args.reserve_address)
+    else:
+        global_var.set_value('reserve_address','1R2Y45QymfK3Bg4shM26kuQKWYjQ4iQA8')
+    if args.reserve_percentage is not None and 1<=args.reserve_percentage<=90:
+        global_var.set_value('reserve_percentage',args.reserve_percentage*2)
+    else:
+        global_var.set_value('reserve_percentage',0)
+
     def separate_url(url):
         s = urlparse.urlsplit(url)
         if '@' not in s.netloc:

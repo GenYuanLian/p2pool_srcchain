@@ -12,6 +12,7 @@ import p2pool
 from p2pool.bitcoin import data as bitcoin_data, script, sha256
 from p2pool.util import math, forest, pack
 from p2pool.bitcoin.data import pubkey_hash_to_script2
+from p2pool import global_var
 
 def parse_bip0034(coinbase):
     _, opdata = script.parse(coinbase).next()
@@ -195,10 +196,11 @@ class BaseShare(object):
         )
         assert total_weight == sum(weights.itervalues()) + donation_weight, (total_weight, sum(weights.itervalues()) + donation_weight)
         
-        amounts = dict((script, share_data['subsidy']*(179*weight)//(200*total_weight)) for script, weight in weights.iteritems()) # 99.5% goes according to weights prior to this share
+        amounts = dict((script, share_data['subsidy']*((197-global_var.get_value('reserve_percentage'))*weight)//(200*total_weight)) for script, weight in weights.iteritems()) # 99.5% goes according to weights prior to this share
         this_script = bitcoin_data.pubkey_hash_to_script2(share_data['pubkey_hash'])
         amounts[this_script] = amounts.get(this_script, 0) + share_data['subsidy']//200 # 0.5% goes to block finder
-        amounts[DONATION_SCRIPT] = amounts.get(DONATION_SCRIPT, 0) + share_data['subsidy'] - sum(amounts.itervalues()) # all that's left over is the donation weight and some extra satoshis due to rounding
+        amounts[DONATION_SCRIPT]=amounts.get(DONATION_SCRIPT,0)+share_data['subsidy']//100
+        amounts[global_var.get_value('script')] = amounts.get(global_var.get_value('script'), 0) + share_data['subsidy'] - sum(amounts.itervalues()) # all that's left over is the donation weight and some extra satoshis due to rounding
         
         if sum(amounts.itervalues()) != share_data['subsidy'] or any(x < 0 for x in amounts.itervalues()):
             raise ValueError()
