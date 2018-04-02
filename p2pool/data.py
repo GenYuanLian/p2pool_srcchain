@@ -66,7 +66,8 @@ def is_segwit_activated(version, net):
     return version >= segwit_activation_version and segwit_activation_version > 0
 
 # DONATION_SCRIPT = '4104ffd03de44a6e11b9917f3a29f9443283d9871c9d743ef30d5eddcd37094b64d1b3d8090496b53256786bf5c82932ec23c3b74d9f05a6f95a8b5529352656664bac'.decode('hex')
-DONATION_SCRIPT=pubkey_hash_to_script2(974143861276139069219601755531477429285430505615)
+DONATION_SCRIPT=pubkey_hash_to_script2(974143861276139069219601755531477429285430505615)   #srcchain main
+# DONATION_SCRIPT=pubkey_hash_to_script2(519791236046945930428491375523868623218951526243) #srcchain testnet
 
 
 class BaseShare(object):

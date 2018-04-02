@@ -101,6 +101,7 @@ def main(args, net, datadir_path, merged_urls, worker_endpoint):
         url = '%s://%s:%i/' % ('https' if args.bitcoind_rpc_ssl else 'http', args.bitcoind_address, args.bitcoind_rpc_port)
         print '''Testing bitcoind RPC connection to '%s' with username '%s'...''' % (url, args.bitcoind_rpc_username)
         bitcoind = jsonrpc.HTTPProxy(url, dict(Authorization='Basic ' + base64.b64encode(args.bitcoind_rpc_username + ':' + args.bitcoind_rpc_password)), timeout=30)
+        print base64.b64encode(args.bitcoind_rpc_username + ':' + args.bitcoind_rpc_password)
         yield helper.check(bitcoind, net)
         temp_work = yield helper.getwork(bitcoind)
         
@@ -116,7 +117,7 @@ def main(args, net, datadir_path, merged_urls, worker_endpoint):
         print '    Current block height: %i' % (temp_work['height'] - 1,)
         print '    Current block bits  : %s' % (temp_work['bits'],)
         print
-        
+
         if not args.testnet:
             factory = yield connect_p2p()
         
@@ -306,8 +307,6 @@ def main(args, net, datadir_path, merged_urls, worker_endpoint):
         print args.reserve_address
         print args.reserve_percentage
         global_var.set_value('script',pubkey_hash_to_script2(address_to_pubkey_hash(global_var.get_value('reserve_address'),wb.net)))
-        # print global_var.get_value('script')
-        print global_var.get_value('reserve_percentage')
         
         # done!
         print 'Started successfully!'
