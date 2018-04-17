@@ -1,3 +1,4 @@
+# Copyright (c) 2018 GenYuanLian
 # -*- coding: utf-8 -*-
 
 def _init():  # 初始化

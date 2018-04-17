@@ -1,5 +1,6 @@
-from __future__ import division
+# Copyright (c) 2018 GenYuanLian
 
+from __future__ import division
 import hashlib
 import os
 import random

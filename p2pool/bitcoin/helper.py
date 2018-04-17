@@ -1,8 +1,8 @@
+# Copyright (c) 2018 GenYuanLian
+
 import sys
 import time
-
 from twisted.internet import defer
-
 import p2pool
 from p2pool.bitcoin import data as bitcoin_data
 from p2pool.util import deferral, jsonrpc

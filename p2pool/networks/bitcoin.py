@@ -1,3 +1,5 @@
+# Copyright (c) 2018 GenYuanLian
+
 from p2pool.bitcoin import networks
 
 # CHAIN_LENGTH = number of shares back client keeps

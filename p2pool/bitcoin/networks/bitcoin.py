@@ -1,6 +1,6 @@
+# Copyright (c) 2018 GenYuanLian
 import os
 import platform
-
 from twisted.internet import defer
 
 from .. import data, helper

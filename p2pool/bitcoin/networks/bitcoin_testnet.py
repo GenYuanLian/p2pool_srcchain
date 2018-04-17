@@ -1,3 +1,4 @@
+# Copyright (c) 2018 GenYuanLian
 import os
 import platform
 
