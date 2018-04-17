@@ -16,7 +16,7 @@ RPC_CHECK = defer.inlineCallbacks(lambda bitcoind: defer.returnValue(
             # 'bitcoinaddress' in (yield bitcoind.rpc_help()) and
             (yield bitcoind.rpc_getblockchaininfo())['chain'] == 'test'
         ))
-SUBSIDY_FUNC = lambda height: 50*100000000 >> (height + 1)//210000
+SUBSIDY_FUNC = lambda height: 50000*100000000 >> (height + 1)//210000
 # POW_FUNC = data.hash256
 POW_FUNC = lambda data: pack.IntType(256).unpack(__import__('Lyra2Z_scrypt').getPoWHash(data))
 BLOCK_PERIOD = 600 # s

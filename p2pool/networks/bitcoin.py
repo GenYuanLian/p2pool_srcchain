@@ -21,10 +21,10 @@ MIN_TARGET = 0
 # MAX_TARGET = 2**256//2**25 - 1 #rbtc args
 MAX_TARGET = 2**256//2**28 - 1   #scchain args
 # MAX_TARGET = 0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
-#PERSIST = True
+# PERSIST = True
 PERSIST = False
 WORKER_PORT = 9332
-BOOTSTRAP_ADDRS = '192.168.138.1 192.168.138.134 192.168.138.133'.split(' ')
+BOOTSTRAP_ADDRS = ''.split(' ')
 ANNOUNCE_CHANNEL = '#p2pool'
 VERSION_CHECK = lambda v: None if 100000 <= v else 'Bitcoin version too old. Upgrade to 0.11.2 or newer!' # not a bug. BIP65 support is ensured by SOFTFORKS_REQUIRED
 VERSION_WARNING = lambda v: None

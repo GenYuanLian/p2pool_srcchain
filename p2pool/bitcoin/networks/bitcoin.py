@@ -34,9 +34,9 @@ POW_FUNC = lambda data: pack.IntType(256).unpack(__import__('Lyra2Z_scrypt').get
 BLOCK_PERIOD = 600 # s
 SYMBOL = 'BSTK'
 CONF_FILE_FUNC = lambda: os.path.join(os.path.join(os.environ['APPDATA'], 'Bitcoin') if platform.system() == 'Windows' else os.path.expanduser('~/Library/Application Support/Bitcoin/') if platform.system() == 'Darwin' else os.path.expanduser('~/.bitcoin'), 'bitcoin.conf')
-BLOCK_EXPLORER_URL_PREFIX = 'https://blockchain.info/block/'
-ADDRESS_EXPLORER_URL_PREFIX = 'https://blockchain.info/address/'
-TX_EXPLORER_URL_PREFIX = 'https://blockchain.info/tx/'
+BLOCK_EXPLORER_URL_PREFIX = 'https://block.genyuanlian.com/block/'
+ADDRESS_EXPLORER_URL_PREFIX = 'https://block.genyuanlian.com/address/'
+TX_EXPLORER_URL_PREFIX = 'https://block.genyuanlian.com/tx/'
 # SANE_TARGET_RANGE = (2**256//2**32//1000000 - 1, 2**256//2**32 - 1)
 # SANE_TARGET_RANGE = (2**256//2**32//1000000 - 1, 2**256//2**16 - 1)
 # SANE_TARGET_RANGE = (2**256//2**32//1000000 - 1, 2**256//2**25 - 1) #rbtc args
