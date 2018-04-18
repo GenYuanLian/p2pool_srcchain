@@ -18,7 +18,7 @@ configurations, using P2Pool should be as simple as:
 
     cd Lyra2Z
     python setup.py install
-    python run_p2pool.py --bitcoind-config-path=/your/sourcechain/configfile/path
+    python run_p2pool.py --srcchaind-config-path=/your/sourcechain/configfile/path 
 
 Then run your miner program, connecting to 127.0.0.1 on port 9332 with any
 username and password.
