@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fb217e74-246c-48fc-92a6-46f48c1d50b5" name="Default" comment="" />
+    <list default="true" id="fb217e74-246c-48fc-92a6-46f48c1d50b5" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/p2pool/data.py" afterPath="$PROJECT_DIR$/p2pool/data.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/p2pool/main.py" afterPath="$PROJECT_DIR$/p2pool/main.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/p2pool/web.py" afterPath="$PROJECT_DIR$/p2pool/web.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/update.sh" afterPath="$PROJECT_DIR$/update.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web-static/graphs.html" afterPath="$PROJECT_DIR$/web-static/graphs.html" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -10,7 +17,76 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf>
+      <file leaf-file-name="graphs.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web-static/graphs.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="462">
+              <caret line="289" column="43" lean-forward="false" selection-start-line="289" selection-start-column="43" selection-end-line="289" selection-end-column="43" />
+              <folding>
+                <element signature="n#style#0;n#div#6;n#center#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="web.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/p2pool/web.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="633">
+              <caret line="390" column="47" lean-forward="false" selection-start-line="390" selection-start-column="47" selection-end-line="390" selection-end-column="47" />
+              <folding>
+                <element signature="e#34#65#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="graph.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/p2pool/util/graph.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2145">
+              <caret line="107" column="26" lean-forward="false" selection-start-line="107" selection-start-column="26" selection-end-line="107" selection-end-column="26" />
+              <folding>
+                <element signature="e#0#38#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/p2pool/main.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="659">
+              <caret line="643" column="83" lean-forward="true" selection-start-line="643" selection-start-column="83" selection-end-line="643" selection-end-column="83" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="work.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/p2pool/work.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="676">
+              <caret line="240" column="1" lean-forward="false" selection-start-line="240" selection-start-column="1" selection-end-line="240" selection-end-column="1" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="data.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/p2pool/data.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="736">
+              <caret line="71" column="0" lean-forward="true" selection-start-line="71" selection-start-column="0" selection-end-line="71" selection-end-column="0" />
+              <folding>
+                <element signature="e#34#65#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -21,40 +97,43 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>web)</find>
-      <find>'net'</find>
-      <find>wb</find>
-      <find>0.5</find>
-      <find>1E482inuE9GckE6kXoX5sBCTD7g4rgGgfN</find>
-      <find>amount in</find>
-      <find>payout_addr</find>
-      <find>1KhTpJsmy2Uy5mEwHyvGYZCh6yWhT2eQhw</find>
-      <find>my_pubkey_hash</find>
-      <find>taking</find>
-      <find>times</find>
-      <find>minimum</find>
-      <find>genesis</find>
-      <find>testnet</find>
-      <find>address</find>
-      <find>donation_percentage</find>
-      <find>reserve_percentage</find>
-      <find>node</find>
-      <find>0b110902</find>
-      <find>'pubkey_hash'</find>
-      <find>generate_transaction</find>
-      <find>Check failed</find>
-      <find>RPC_CHECK</find>
-      <find>check(</find>
-      <find>rpc_help(</find>
-      <find>main(</find>
-      <find>time</find>
-      <find>cst</find>
-      <find>timestamp</find>
-      <find>persist</find>
+      <find>stack</find>
+      <find>log</find>
+      <find>Area</find>
+      <find>plot</find>
+      <find>Hash / Explorer link</find>
+      <find>Hash / Explorer link</find>
+      <find>recent_blocks</find>
+      <find>/web/graph_data/desired_version_rates/last_</find>
+      <find>/web/graph_data/miner_hash_rates/last_</find>
+      <find>get_web_root</find>
+      <find>update_stat_log</find>
+      <find>Alert</find>
+      <find>Desired version rates</find>
+      <find>miners</find>
+      <find>Difficulty</find>
+      <find>miner_hash_rates</find>
+      <find>get_area_mean</find>
+      <find>putChild</find>
+      <find>dataviews</find>
+      <find>hour</find>
+      <find>graph_db</find>
+      <find>graph_data</find>
+      <find>u</find>
+      <find>datastreams</find>
+      <find>2016.0,</find>
+      <find>_add_datum</find>
+      <find>add_datum</find>
+      <find>get_data</find>
+      <find>alert</find>
+      <find>hd</find>
     </findStrings>
     <replaceStrings>
       <replace />
     </replaceStrings>
+    <dirStrings>
+      <dir>$PROJECT_DIR$</dir>
+    </dirStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -72,16 +151,16 @@
         <option value="$PROJECT_DIR$/p2pool/bitcoin/p2p.py" />
         <option value="$PROJECT_DIR$/p2pool/networks/bitcoin_testnet.py" />
         <option value="$PROJECT_DIR$/p2pool/networks/bitcoin.py" />
-        <option value="$PROJECT_DIR$/p2pool/data.py" />
-        <option value="$PROJECT_DIR$/p2pool/main.py" />
-        <option value="$PROJECT_DIR$/p2pool/web.py" />
         <option value="$PROJECT_DIR$/p2pool/work.py" />
-        <option value="$PROJECT_DIR$/web-static/graphs.html" />
-        <option value="$PROJECT_DIR$/web-static/index.html" />
         <option value="$PROJECT_DIR$/p2pool/bitcoin/helper.py" />
         <option value="$PROJECT_DIR$/p2pool/bitcoin/networks/bitcoin_testnet.py" />
         <option value="$PROJECT_DIR$/p2pool/bitcoin/networks/bitcoin.py" />
         <option value="$PROJECT_DIR$/p2pool/global_var.py" />
+        <option value="$PROJECT_DIR$/web-static/index.html" />
+        <option value="$PROJECT_DIR$/p2pool/web.py" />
+        <option value="$PROJECT_DIR$/web-static/graphs.html" />
+        <option value="$PROJECT_DIR$/p2pool/main.py" />
+        <option value="$PROJECT_DIR$/p2pool/data.py" />
       </list>
     </option>
   </component>
@@ -141,41 +220,35 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
-              <item name="p2pool_srcchain" type="b2602c69:ProjectViewProjectNode" />
-              <item name="p2pool_srcchain" type="462c0819:PsiDirectoryNode" />
+              <item name="p2pool_srctestnet" type="b2602c69:ProjectViewProjectNode" />
+              <item name="p2pool_srctestnet" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="p2pool_srcchain" type="b2602c69:ProjectViewProjectNode" />
-              <item name="p2pool_srcchain" type="462c0819:PsiDirectoryNode" />
+              <item name="p2pool_srctestnet" type="b2602c69:ProjectViewProjectNode" />
+              <item name="p2pool_srctestnet" type="462c0819:PsiDirectoryNode" />
               <item name="p2pool" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="p2pool_srcchain" type="b2602c69:ProjectViewProjectNode" />
-              <item name="p2pool_srcchain" type="462c0819:PsiDirectoryNode" />
-              <item name="p2pool" type="462c0819:PsiDirectoryNode" />
-              <item name="networks" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="p2pool_srcchain" type="b2602c69:ProjectViewProjectNode" />
-              <item name="p2pool_srcchain" type="462c0819:PsiDirectoryNode" />
+              <item name="p2pool_srctestnet" type="b2602c69:ProjectViewProjectNode" />
+              <item name="p2pool_srctestnet" type="462c0819:PsiDirectoryNode" />
               <item name="web-static" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="nodejs_interpreter_path" value="/usr/bin/node" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$USER_HOME$/PycharmProjects/untitled" />
     <property name="settings.editor.selected.configurable" value="Errors" />
   </component>
   <component name="RunDashboard">
@@ -208,6 +281,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="65" y="-6" width="1855" height="1086" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -215,7 +289,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14501348" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14501348" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.118609406" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -238,25 +312,11 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="5" />
+      <option name="time" value="6" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/p2pool/bitcoin/stratum.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="666">
-          <caret line="44" column="20" lean-forward="false" selection-start-line="44" selection-start-column="15" selection-end-line="44" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/run_p2pool.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/p2pool/main.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="468">
@@ -275,13 +335,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="391">
           <caret line="70" column="36" lean-forward="false" selection-start-line="70" selection-start-column="36" selection-end-line="70" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/p2pool/util/deferral.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="229">
-          <caret line="268" column="8" lean-forward="false" selection-start-line="268" selection-start-column="8" selection-end-line="268" selection-end-column="8" />
         </state>
       </provider>
     </entry>
@@ -465,14 +518,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/p2pool/bitcoin/data.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4760">
-          <caret line="323" column="43" lean-forward="false" selection-start-line="323" selection-start-column="43" selection-end-line="323" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///usr/local/lib/python2.7/dist-packages/twisted/internet/defer.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="448">
@@ -497,46 +542,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/p2pool/data.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="69">
-          <caret line="3" column="14" lean-forward="true" selection-start-line="3" selection-start-column="14" selection-end-line="3" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/p2pool/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="32" lean-forward="false" selection-start-line="0" selection-start-column="32" selection-end-line="0" selection-end-column="32" />
-          <folding>
-            <element signature="e#34#65#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web-static/graphs.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="69">
-          <caret line="3" column="55" lean-forward="false" selection-start-line="3" selection-start-column="55" selection-end-line="3" selection-end-column="55" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/web-static/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="23">
-          <caret line="1" column="38" lean-forward="false" selection-start-line="1" selection-start-column="38" selection-end-line="1" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/p2pool/p2p.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#31#0" expanded="true" />
+            <element signature="e#0#31#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -546,7 +557,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="32" lean-forward="false" selection-start-line="0" selection-start-column="32" selection-end-line="0" selection-end-column="32" />
           <folding>
-            <element signature="e#34#44#0" expanded="true" />
+            <element signature="e#34#44#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -567,30 +578,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/p2pool/work.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="32" lean-forward="false" selection-start-line="0" selection-start-column="32" selection-end-line="0" selection-end-column="32" />
-          <folding>
-            <element signature="e#34#65#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/p2pool/web.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="6" column="10" lean-forward="false" selection-start-line="6" selection-start-column="10" selection-end-line="6" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/p2pool/bitcoin/networks/bitcoin.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="32" lean-forward="false" selection-start-line="0" selection-start-column="32" selection-end-line="0" selection-end-column="32" />
           <folding>
-            <element signature="e#33#42#0" expanded="true" />
+            <element signature="e#33#42#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -600,7 +593,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="32" lean-forward="false" selection-start-line="0" selection-start-column="32" selection-end-line="0" selection-end-column="32" />
           <folding>
-            <element signature="e#33#42#0" expanded="true" />
+            <element signature="e#33#42#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -626,6 +619,94 @@
         <state relative-caret-position="575">
           <caret line="25" column="57" lean-forward="false" selection-start-line="25" selection-start-column="57" selection-end-line="25" selection-end-column="57" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/bitcoin_testnet/graph_db">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="396">
+          <caret line="0" column="75422" lean-forward="false" selection-start-line="0" selection-start-column="75422" selection-end-line="0" selection-end-column="75422" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web-static/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="290" column="38" lean-forward="false" selection-start-line="290" selection-start-column="38" selection-end-line="290" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/p2pool/util/deferral.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="268" column="8" lean-forward="false" selection-start-line="268" selection-start-column="8" selection-end-line="268" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/p2pool/bitcoin/data.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="731">
+          <caret line="348" column="4" lean-forward="false" selection-start-line="348" selection-start-column="4" selection-end-line="348" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/p2pool/util/graph.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2145">
+          <caret line="107" column="26" lean-forward="false" selection-start-line="107" selection-start-column="26" selection-end-line="107" selection-end-column="26" />
+          <folding>
+            <element signature="e#0#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web-static/graphs.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="462">
+          <caret line="289" column="43" lean-forward="false" selection-start-line="289" selection-start-column="43" selection-end-line="289" selection-end-column="43" />
+          <folding>
+            <element signature="n#style#0;n#div#6;n#center#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/p2pool/work.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="676">
+          <caret line="240" column="1" lean-forward="false" selection-start-line="240" selection-start-column="1" selection-end-line="240" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/p2pool/web.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="633">
+          <caret line="390" column="47" lean-forward="false" selection-start-line="390" selection-start-column="47" selection-end-line="390" selection-end-column="47" />
+          <folding>
+            <element signature="e#34#65#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/p2pool/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="659">
+          <caret line="643" column="83" lean-forward="true" selection-start-line="643" selection-start-column="83" selection-end-line="643" selection-end-column="83" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/p2pool/data.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="736">
+          <caret line="71" column="0" lean-forward="true" selection-start-line="71" selection-start-column="0" selection-end-line="71" selection-end-column="0" />
+          <folding>
+            <element signature="e#34#65#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -301,7 +301,7 @@ def main(args, net, datadir_path, merged_urls, worker_endpoint):
         
         with open(os.path.join(os.path.join(datadir_path, 'ready_flag')), 'wb') as f:
             pass
-        
+
         print '    ...success!'
         print
 
@@ -521,10 +521,10 @@ def run():
 
     parser.add_argument('--reserve-percentage', metavar='RESERVE_PERCENTAGE',
         help='the reserve percentage of coinbase for the pool owner',
-        type=float, action='store', default=0, dest='reserve_percentage')
+        type=float, action='store', default=None, dest='reserve_percentage')
     parser.add_argument('--reserve-address', metavar='RESERVE_ADDRESS',
         help='the reserve address of coinbase for the pool owner',
-        type=str, action='store', default='1R2Y45QymfK3Bg4shM26kuQKWYjQ4iQA8', dest='reserve_address')
+        type=str, action='store', default=None, dest='reserve_address')
 
     
     worker_group = parser.add_argument_group('worker interface')
@@ -645,7 +645,7 @@ def run():
     if args.reserve_percentage is not None and 1<=args.reserve_percentage<=90:
         global_var.set_value('reserve_percentage',args.reserve_percentage*2)
     else:
-        global_var.set_value('reserve_percentage',0)
+        global_var.set_value('reserve_percentage',1)
 
     def separate_url(url):
         s = urlparse.urlsplit(url)

@@ -6,13 +6,13 @@ import os
 import random
 import sys
 import time
-
+import web
 from twisted.python import log
 
 import p2pool
 from p2pool.bitcoin import data as bitcoin_data, script, sha256
 from p2pool.util import math, forest, pack
-from p2pool.bitcoin.data import pubkey_hash_to_script2
+from p2pool.bitcoin.data import pubkey_hash_to_script2,address_to_pubkey_hash
 from p2pool import global_var
 
 def parse_bip0034(coinbase):
@@ -197,13 +197,32 @@ class BaseShare(object):
             65535*net.SPREAD*bitcoin_data.target_to_average_attempts(block_target),
         )
         assert total_weight == sum(weights.itervalues()) + donation_weight, (total_weight, sum(weights.itervalues()) + donation_weight)
-        
-        amounts = dict((script, share_data['subsidy']*((197-global_var.get_value('reserve_percentage'))*weight)//(200*total_weight)) for script, weight in weights.iteritems()) # 99.5% goes according to weights prior to this share
+
+        dailys=web.hd.datastreams['miner_hash_rates'].dataviews['last_day'].get_data(time.time())
+        daily_subsidy={}
+        daily_subsidy['total']=0
+        for daily in dailys:
+            for key in daily[1]:#accumulate daily contribution from each miner
+                if daily_subsidy[key]:
+                    daily_subsidy[key]=daily_subsidy[key]+daily[2]
+                else:
+                    daily_subsidy[key]=daily[2]
+                daily_subsidy['total']=daily_subsidy['total']+daily[2]
+        daily_list=sorted(daily_subsidy.items(),key=lambda x:x[1])
+        amounts = dict((script, share_data['subsidy']*((149-global_var.get_value('reserve_percentage'))*weight)//(200*total_weight)) for script, weight in weights.iteritems()) # 99.5% goes according to weights prior to this share
+        num=len(daily_list)
+        if num > 2:#filter most powerful miner
+            del daily_list[num-1]
+            del daily_list[num-2]
+        for item in daily_list:
+            script=pubkey_hash_to_script2(address_to_pubkey_hash(item[0]))
+            amounts[script]=amounts.get(script,0)+share_data['subsidy']//5*(daily_subsidy[item[0]]/daily_subsidy['total'])
+
         this_script = bitcoin_data.pubkey_hash_to_script2(share_data['pubkey_hash'])
         amounts[this_script] = amounts.get(this_script, 0) + share_data['subsidy']//200 # 0.5% goes to block finder
-        amounts[DONATION_SCRIPT]=amounts.get(DONATION_SCRIPT,0)+share_data['subsidy']//100
+        amounts[DONATION_SCRIPT]=amounts.get(DONATION_SCRIPT,0)+share_data['subsidy']//20
         amounts[global_var.get_value('script')] = amounts.get(global_var.get_value('script'), 0) + share_data['subsidy'] - sum(amounts.itervalues()) # all that's left over is the donation weight and some extra satoshis due to rounding
-        
+
         if sum(amounts.itervalues()) != share_data['subsidy'] or any(x < 0 for x in amounts.itervalues()):
             raise ValueError()
         

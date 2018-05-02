@@ -17,6 +17,8 @@ from bitcoin import data as bitcoin_data
 from . import data as p2pool_data, p2p
 from util import deferral, deferred_resource, graph, math, memory, pack, variable
 
+hd=''
+
 def _atomic_read(filename):
     try:
         with open(filename, 'rb') as f:
@@ -257,7 +259,7 @@ def get_web_root(wb, datadir_path, bitcoind_getinfo_var, stop_event=variable.Eve
         global_stale_prop = p2pool_data.get_average_stale_prop(node.tracker, node.best_share_var.value, lookbehind)
         (stale_orphan_shares, stale_doa_shares), shares, _ = wb.get_stale_counts()
         miner_hash_rates, miner_dead_hash_rates = wb.get_local_rates()
-        
+
         my_current_payout=0.0
         for add in wb.pubkeys.keys:
             my_current_payout+=node.get_current_txouts().get(bitcoin_data.pubkey_hash_to_script2(add), 0)*1e-8
@@ -361,7 +363,8 @@ def get_web_root(wb, datadir_path, bitcoind_getinfo_var, stop_event=variable.Eve
         tx_explorer_url_prefix=node.net.PARENT.TX_EXPLORER_URL_PREFIX,
     )))
     new_root.putChild('version', WebInterface(lambda: p2pool.__version__))
-    
+
+    global hd
     hd_path = os.path.join(datadir_path, 'graph_db')
     hd_data = _atomic_read(hd_path)
     hd_obj = {}
@@ -397,6 +400,7 @@ def get_web_root(wb, datadir_path, bitcoind_getinfo_var, stop_event=variable.Eve
         'getwork_latency': graph.DataStreamDescription(dataview_descriptions),
         'memory_usage': graph.DataStreamDescription(dataview_descriptions),
     }, hd_obj)
+
     x = deferral.RobustLoopingCall(lambda: _atomic_write(hd_path, json.dumps(hd.to_obj())))
     x.start(100)
     stop_event.watch(x.stop)
@@ -469,7 +473,7 @@ def get_web_root(wb, datadir_path, bitcoind_getinfo_var, stop_event=variable.Eve
     def _(new_work):
         hd.datastreams['getwork_latency'].add_datum(time.time(), new_work['latency'])
     new_root.putChild('graph_data', WebInterface(lambda source, view: hd.datastreams[source].dataviews[view].get_data(time.time())))
-    
+
     if static_dir is None:
         static_dir = os.path.join(os.path.dirname(os.path.abspath(sys.argv[0])), 'web-static')
     web_root.putChild('static', static.File(static_dir))
