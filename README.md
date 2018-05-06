@@ -39,6 +39,11 @@ Developers are available at:
 | :---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Gitter                  | [![Join the chat at https://gitter.im/genyuanlian-SourceBlockchain/Lobby](https://badges.gitter.im/genyuanlian-SourceBlockchain/Lobby.svg)](https://gitter.im/genyuanlian-SourceBlockchain/p2pool_srcchain?utm_source=share-link&utm_medium=link&utm_campaign=share-link) |
 
+Issues & PRs management
+-------------------------
+[![Waffle.io - Columns and their card count](https://badge.waffle.io/GenYuanLian/p2pool_srcchain.svg?columns=all)](https://waffle.io/GenYuanLian/p2pool_srcchain)
+[![Throughput Graph](https://graphs.waffle.io/GenYuanLian/p2pool_srcchain/throughput.svg)](https://waffle.io/GenYuanLian/p2pool_srcchain/metrics/throughput)
+
 LICENSE
 -------------------------
 [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
