@@ -29,3 +29,12 @@ router. Forward port 9333 to the host running P2Pool.
 Run for additional options.
 
     python run_p2pool.py --help
+
+Contact Developers
+-------------------------
+
+Developers are available at:
+
+| Label Name              | Description                                                                                                                                                                                                                                                               |
+| :---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Gitter                  | [![Join the chat at https://gitter.im/genyuanlian-SourceBlockchain/Lobby](https://badges.gitter.im/genyuanlian-SourceBlockchain/Lobby.svg)](https://gitter.im/genyuanlian-SourceBlockchain/p2pool_srcchain?utm_source=share-link&utm_medium=link&utm_campaign=share-link) |
