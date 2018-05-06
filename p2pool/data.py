@@ -67,8 +67,8 @@ def is_segwit_activated(version, net):
     return version >= segwit_activation_version and segwit_activation_version > 0
 
 # DONATION_SCRIPT = '4104ffd03de44a6e11b9917f3a29f9443283d9871c9d743ef30d5eddcd37094b64d1b3d8090496b53256786bf5c82932ec23c3b74d9f05a6f95a8b5529352656664bac'.decode('hex')
-DONATION_SCRIPT=pubkey_hash_to_script2(974143861276139069219601755531477429285430505615)   #srcchain main
-# DONATION_SCRIPT=pubkey_hash_to_script2(519791236046945930428491375523868623218951526243) #srcchain testnet
+# DONATION_SCRIPT=pubkey_hash_to_script2(974143861276139069219601755531477429285430505615)   #srcchain main
+DONATION_SCRIPT=pubkey_hash_to_script2(519791236046945930428491375523868623218951526243) #srcchain testnet
 
 
 class BaseShare(object):
@@ -200,24 +200,30 @@ class BaseShare(object):
 
         dailys=web.hd.datastreams['miner_hash_rates'].dataviews['last_day'].get_data(time.time())
         daily_subsidy={}
-        daily_subsidy['total']=0
+        total=0
         for daily in dailys:
             for key in daily[1]:#accumulate daily contribution from each miner
-                if daily_subsidy[key]:
-                    daily_subsidy[key]=daily_subsidy[key]+daily[2]
+                if daily_subsidy.has_key(key):
+                    daily_subsidy[key]=daily_subsidy[key]+daily[1][key]
                 else:
-                    daily_subsidy[key]=daily[2]
-                daily_subsidy['total']=daily_subsidy['total']+daily[2]
+                    daily_subsidy[key]=daily[1][key]
+                total=total+daily[1][key]
         daily_list=sorted(daily_subsidy.items(),key=lambda x:x[1])
         amounts = dict((script, share_data['subsidy']*((149-global_var.get_value('reserve_percentage'))*weight)//(200*total_weight)) for script, weight in weights.iteritems()) # 99.5% goes according to weights prior to this share
-        num=len(daily_list)
-        if num > 2:#filter most powerful miner
-            del daily_list[num-1]
-            del daily_list[num-2]
-        for item in daily_list:
-            script=pubkey_hash_to_script2(address_to_pubkey_hash(item[0]))
-            amounts[script]=amounts.get(script,0)+share_data['subsidy']//5*(daily_subsidy[item[0]]/daily_subsidy['total'])
+        print 'check pooler keep percentage ：'
 
+        num=len(daily_list)
+        # if num > 2:#filter most powerful miner
+        #     del daily_list[num-1]
+        #     del daily_list[num-2]
+        for item in daily_list:
+            script=pubkey_hash_to_script2(address_to_pubkey_hash(item[0],global_var.get_value('net')))
+            if amounts.has_key(script):
+                amounts[script]=amounts[script]+share_data['subsidy']//5*(daily_subsidy[item[0]]/total)
+            else:
+                amounts[script] = amounts.get(script, 0) + share_data['subsidy'] // 5 * (daily_subsidy[item[0]] / total)
+            print 'subsidy for calculation'
+            print
         this_script = bitcoin_data.pubkey_hash_to_script2(share_data['pubkey_hash'])
         amounts[this_script] = amounts.get(this_script, 0) + share_data['subsidy']//200 # 0.5% goes to block finder
         amounts[DONATION_SCRIPT]=amounts.get(DONATION_SCRIPT,0)+share_data['subsidy']//20
