@@ -38,3 +38,7 @@ Developers are available at:
 | Label Name              | Description                                                                                                                                                                                                                                                               |
 | :---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Gitter                  | [![Join the chat at https://gitter.im/genyuanlian-SourceBlockchain/Lobby](https://badges.gitter.im/genyuanlian-SourceBlockchain/Lobby.svg)](https://gitter.im/genyuanlian-SourceBlockchain/p2pool_srcchain?utm_source=share-link&utm_medium=link&utm_campaign=share-link) |
+
+LICENSE
+-------------------------
+[![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
