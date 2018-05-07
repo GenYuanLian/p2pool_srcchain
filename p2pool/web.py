@@ -15,9 +15,8 @@ from twisted.web import resource, static
 import p2pool
 from bitcoin import data as bitcoin_data
 from . import data as p2pool_data, p2p
-from util import deferral, deferred_resource, graph, math, memory, pack, variable
+from util import deferral, deferred_resource, graph, math, memory, variable
 
-hd=''
 
 def _atomic_read(filename):
     try:
@@ -364,7 +363,6 @@ def get_web_root(wb, datadir_path, bitcoind_getinfo_var, stop_event=variable.Eve
     )))
     new_root.putChild('version', WebInterface(lambda: p2pool.__version__))
 
-    global hd
     hd_path = os.path.join(datadir_path, 'graph_db')
     hd_data = _atomic_read(hd_path)
     hd_obj = {}

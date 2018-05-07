@@ -64,9 +64,7 @@ class StratumRPCMiningProvider(object):
             return
         global_var.subsidy_cal[self.script]=global_var.subsidy_cal[self.script]+1#generally add a contribution when new work send to miner(a block or share found)
         global_var.total_cal=global_var.total_cal+1
-        # print 'sent work .............checkout...........'
-        # print self.username
-    
+
     def rpc_submit(self, worker_name, job_id, extranonce2, ntime, nonce):
         if job_id not in self.handler_map:
             print >>sys.stderr, '''Couldn't link returned work's job id with its handler. This should only happen if this process was recently restarted!'''
@@ -86,7 +84,6 @@ class StratumRPCMiningProvider(object):
         return got_response(header, worker_name, coinb_nonce)
     
     def close(self):
-        print self.username
         self.wb.new_work_event.unwatch(self.watch_id)
 
 class StratumProtocol(jsonrpc.LineBasedPeer):

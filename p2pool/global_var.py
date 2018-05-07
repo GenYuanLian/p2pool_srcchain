@@ -17,17 +17,9 @@ def get_value(key, defvalue=None):
     except KeyError:
         return defvalue
 
-
 subsidy_cal = {}  # 算力补贴表
 total_cal = 1
 time_check=0
-
-# def pulse_one():
-#     for key in subsidy_cal:
-#         subsidy_cal[key] = subsidy_cal[key] + 1
-#     global total_cal
-#     total_cal = total_cal + len(subsidy_cal)
-
 
 def reset_subsidy():
     for key in subsidy_cal:

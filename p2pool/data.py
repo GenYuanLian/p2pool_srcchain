@@ -4,11 +4,8 @@ from __future__ import division
 import hashlib
 import os
 import random
-import sys
 import time
-import web
 from twisted.python import log
-
 import p2pool
 from p2pool.bitcoin import data as bitcoin_data, script, sha256
 from p2pool.util import math, forest, pack
@@ -198,24 +195,19 @@ class BaseShare(object):
         )
         assert total_weight == sum(weights.itervalues()) + donation_weight, (total_weight, sum(weights.itervalues()) + donation_weight)
 
-        # dailys=web.hd.datastreams['miner_hash_rates'].dataviews['last_day'].get_data(time.time())
-
         amounts = dict((script, share_data['subsidy']*((149-global_var.get_value('reserve_percentage'))*weight)//(200*total_weight)) for script, weight in weights.iteritems()) # 74.5% goes according to weights prior to this share
 
         for key in global_var.subsidy_cal:
             if amounts.has_key(key):
-                amounts[key] = amounts[key] + share_data['subsidy'] // 5 * (global_var.subsidy_cal[key] / global_var.total_cal)  # 20% for subsidy
+                amounts[key] = amounts[key] + share_data['subsidy'] // 5 * (global_var.subsidy_cal[key] // global_var.total_cal)  # 20% for subsidy
             else:
-                amounts[key] = amounts.get(key, 0) + share_data['subsidy'] // 5 * (global_var.subsidy_cal[key] / global_var.total_cal)
+                amounts[key] = amounts.get(key, 0) + share_data['subsidy'] // 5 * (global_var.subsidy_cal[key] // global_var.total_cal)
         this_script = bitcoin_data.pubkey_hash_to_script2(share_data['pubkey_hash'])
         amounts[this_script] = amounts.get(this_script, 0) + share_data['subsidy']//200 # 0.5% goes to block finder
         amounts[DONATION_SCRIPT]=amounts.get(DONATION_SCRIPT,0)+share_data['subsidy']//20
         amounts[global_var.get_value('script')] = amounts.get(global_var.get_value('script'), 0) + share_data['subsidy'] - sum(amounts.itervalues()) # all that's left over is the donation weight and some extra satoshis due to rounding
 
         if sum(amounts.itervalues()) != share_data['subsidy'] or any(x < 0 for x in amounts.itervalues()):
-            # print 'check...amount'
-            # print sum(amounts.itervalues())
-            # print share_data['subsidy']
             raise ValueError()
         
         dests = sorted(amounts.iterkeys(), key=lambda script: (script == DONATION_SCRIPT, amounts[script], script))[-4000:] # block length limit, unlikely to ever be hit
