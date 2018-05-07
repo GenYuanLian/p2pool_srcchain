@@ -45,7 +45,8 @@ Developers are available at:
 
 Issues & PRs management
 -------------------------
-[![Waffle.io - Columns and their card count](https://badge.waffle.io/GenYuanLian/p2pool_srcchain.svg?columns=all)](https://waffle.io/GenYuanLian/p2pool_srcchain)
+[![Waffle.io - Columns and their card count](https://badge.waffle.io/GenYuanLian/p2pool_srcchain.svg?columns=all)](https://waffle.io/GenYuanLian/p2pool_srcchain)             
+
 [![Throughput Graph](https://graphs.waffle.io/GenYuanLian/p2pool_srcchain/throughput.svg)](https://waffle.io/GenYuanLian/p2pool_srcchain/metrics/throughput)
 
 LICENSE
