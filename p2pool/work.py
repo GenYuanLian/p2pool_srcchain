@@ -11,11 +11,12 @@ import time
 from twisted.internet import defer
 from twisted.python import log
 
-import bitcoin.getwork as bitcoin_getwork, bitcoin.data as bitcoin_data
+import bitcoin.data as bitcoin_data
 from bitcoin import helper, script, worker_interface
 from util import forest, jsonrpc, variable, deferral, math, pack
 import p2pool, p2pool.data as p2pool_data
-from p2pool.bitcoin import data
+from p2pool import global_var
+
 
 print_throttle = 0.0
 
@@ -407,6 +408,8 @@ class WorkerBridge(worker_interface.WorkerBridge):
                         print
                         print 'GOT BLOCK FROM MINER! Passing to bitcoind! %s%064x' % (self.node.net.PARENT.BLOCK_EXPLORER_URL_PREFIX, header_hash)
                         print
+                        if header['timestamp']-global_var.time_check >86400:#reset subsidy data per day
+                            global_var.reset_subsidy()
             except:
                 log.err(None, 'Error while processing potential block:')
             

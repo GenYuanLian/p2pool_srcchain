@@ -309,6 +309,7 @@ def main(args, net, datadir_path, merged_urls, worker_endpoint):
         print args.reserve_percentage
         global_var.set_value('script',pubkey_hash_to_script2(address_to_pubkey_hash(global_var.get_value('reserve_address'),wb.net)))
         global_var.set_value('net',wb.net)
+        global_var.time_check=time.time()
         # done!
         print 'Started successfully!'
         print 'Go to http://127.0.0.1:%i/ to view graphs and statistics!' % (worker_endpoint[1],)
@@ -641,7 +642,7 @@ def run():
     if args.reserve_address is not None:
         global_var.set_value('reserve_address',args.reserve_address)
     else:
-        global_var.set_value('reserve_address','mmhVh2F8DGCp7PEsAaUZsZDAVyKWVtJaYz')
+        global_var.set_value('reserve_address','1R2Y45QymfK3Bg4shM26kuQKWYjQ4iQA8')
     if args.reserve_percentage is not None and 1<=args.reserve_percentage<=90:
         global_var.set_value('reserve_percentage',args.reserve_percentage*2)
     else:
