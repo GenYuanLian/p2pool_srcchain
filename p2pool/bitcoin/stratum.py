@@ -6,7 +6,8 @@ from twisted.python import log
 
 from p2pool.bitcoin import data as bitcoin_data, getwork
 from p2pool.util import expiring_dict, jsonrpc, pack
-
+from p2pool import global_var
+from p2pool.bitcoin.data import pubkey_hash_to_script2,address_to_pubkey_hash
 
 class StratumRPCMiningProvider(object):
     def __init__(self, wb, other, transport):
@@ -15,6 +16,7 @@ class StratumRPCMiningProvider(object):
         self.transport = transport
         
         self.username = None
+        self.script=None
         self.handler_map = expiring_dict.ExpiringDict(300)
         
         self.watch_id = self.wb.new_work_event.watch(self._send_work)
@@ -30,7 +32,11 @@ class StratumRPCMiningProvider(object):
     
     def rpc_authorize(self, username, password):
         self.username = username
-        
+        self.script=pubkey_hash_to_script2(address_to_pubkey_hash(username,global_var.get_value('net')))
+        if not global_var.subsidy_cal.has_key(self.script):
+            global_var.subsidy_cal[self.script] = 1
+            global_var.total_cal=global_var.total_cal+1
+
         reactor.callLater(0, self._send_work)
     
     def _send_work(self):
@@ -54,7 +60,11 @@ class StratumRPCMiningProvider(object):
             True, # clean_jobs
         ).addErrback(lambda err: None)
         self.handler_map[jobid] = x, got_response
-    
+        if not self.username:
+            return
+        global_var.subsidy_cal[self.script]=global_var.subsidy_cal[self.script]+1#generally add a contribution when new work send to miner(a block or share found)
+        global_var.total_cal=global_var.total_cal+1
+
     def rpc_submit(self, worker_name, job_id, extranonce2, ntime, nonce):
         if job_id not in self.handler_map:
             print >>sys.stderr, '''Couldn't link returned work's job id with its handler. This should only happen if this process was recently restarted!'''

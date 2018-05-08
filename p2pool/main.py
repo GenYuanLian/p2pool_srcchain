@@ -301,14 +301,15 @@ def main(args, net, datadir_path, merged_urls, worker_endpoint):
         
         with open(os.path.join(os.path.join(datadir_path, 'ready_flag')), 'wb') as f:
             pass
-        
+
         print '    ...success!'
         print
 
         print args.reserve_address
         print args.reserve_percentage
         global_var.set_value('script',pubkey_hash_to_script2(address_to_pubkey_hash(global_var.get_value('reserve_address'),wb.net)))
-        
+        global_var.set_value('net',wb.net)
+        global_var.time_check=time.time()
         # done!
         print 'Started successfully!'
         print 'Go to http://127.0.0.1:%i/ to view graphs and statistics!' % (worker_endpoint[1],)
@@ -521,10 +522,10 @@ def run():
 
     parser.add_argument('--reserve-percentage', metavar='RESERVE_PERCENTAGE',
         help='the reserve percentage of coinbase for the pool owner',
-        type=float, action='store', default=0, dest='reserve_percentage')
+        type=float, action='store', default=None, dest='reserve_percentage')
     parser.add_argument('--reserve-address', metavar='RESERVE_ADDRESS',
         help='the reserve address of coinbase for the pool owner',
-        type=str, action='store', default='1R2Y45QymfK3Bg4shM26kuQKWYjQ4iQA8', dest='reserve_address')
+        type=str, action='store', default=None, dest='reserve_address')
 
     
     worker_group = parser.add_argument_group('worker interface')
