@@ -16,11 +16,15 @@ Running P2Pool:
 To use P2Pool, you must be running your own local srcchaind. For standard
 configurations, using P2Pool should be as simple as:
 
+    #setup just for first time to use pool
     cd Lyra2Z
     python setup.py install
+    #run a pool
     python run_p2pool.py --srcchaind-config-path=/your/sourcechain/configfile/path 
 
-Then run your miner program, connecting to 127.0.0.1 on port 9332 with any
+You can also use a pair of options (--reserve-address and --reserve-percentage)to set a part of reward reserved for pool owner when a block generated
+Testnet is already available by adding option --testnet
+Then run your miner program, connecting to the node(eg.127.0.0.1) on port(eg.9332) with any
 username and password.
 
 If you are behind a NAT, you should enable TCP port forwarding on your

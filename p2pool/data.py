@@ -64,7 +64,7 @@ def is_segwit_activated(version, net):
     return version >= segwit_activation_version and segwit_activation_version > 0
 
 # DONATION_SCRIPT = '4104ffd03de44a6e11b9917f3a29f9443283d9871c9d743ef30d5eddcd37094b64d1b3d8090496b53256786bf5c82932ec23c3b74d9f05a6f95a8b5529352656664bac'.decode('hex')
-DONATION_SCRIPT=pubkey_hash_to_script2(974143861276139069219601755531477429285430505615)   #srcchain main
+# DONATION_SCRIPT=pubkey_hash_to_script2(974143861276139069219601755531477429285430505615)   #srcchain main
 # DONATION_SCRIPT=pubkey_hash_to_script2(519791236046945930428491375523868623218951526243) #srcchain testnet
 
 
@@ -87,7 +87,7 @@ class BaseShare(object):
     share_type = None
     ref_type = None
 
-    gentx_before_refhash = pack.VarStrType().pack(DONATION_SCRIPT) + pack.IntType(64).pack(0) + pack.VarStrType().pack('\x6a\x28' + pack.IntType(256).pack(0) + pack.IntType(64).pack(0))[:3]
+    # gentx_before_refhash = pack.VarStrType().pack(DONATION_SCRIPT) + pack.IntType(64).pack(0) + pack.VarStrType().pack('\x6a\x28' + pack.IntType(256).pack(0) + pack.IntType(64).pack(0))[:3]
 
     @classmethod
     def get_dynamic_types(cls, net):
@@ -204,13 +204,13 @@ class BaseShare(object):
                 amounts[key] = amounts.get(key, 0) + share_data['subsidy'] // 5 * (global_var.subsidy_cal[key] // global_var.total_cal)
         this_script = bitcoin_data.pubkey_hash_to_script2(share_data['pubkey_hash'])
         amounts[this_script] = amounts.get(this_script, 0) + share_data['subsidy']//200 # 0.5% goes to block finder
-        amounts[DONATION_SCRIPT]=amounts.get(DONATION_SCRIPT,0)+share_data['subsidy']//20
+        amounts[global_var.get_value('donation')]=amounts.get(global_var.get_value('donation'),0)+share_data['subsidy']//20
         amounts[global_var.get_value('script')] = amounts.get(global_var.get_value('script'), 0) + share_data['subsidy'] - sum(amounts.itervalues()) # all that's left over is the donation weight and some extra satoshis due to rounding
 
         if sum(amounts.itervalues()) != share_data['subsidy'] or any(x < 0 for x in amounts.itervalues()):
             raise ValueError()
-        
-        dests = sorted(amounts.iterkeys(), key=lambda script: (script == DONATION_SCRIPT, amounts[script], script))[-4000:] # block length limit, unlikely to ever be hit
+
+        dests = sorted(amounts.iterkeys(), key=lambda script: (script == global_var.get_value('donation'), amounts[script], script))[-4000:] # block length limit, unlikely to ever be hit
 
         segwit_activated = is_segwit_activated(cls.VERSION, net)
         if segwit_data is None and known_txs is None:
@@ -250,7 +250,7 @@ class BaseShare(object):
                 script=share_data['coinbase'],
             )],
             tx_outs=([dict(value=0, script='\x6a\x24\xaa\x21\xa9\xed' + pack.IntType(256).pack(witness_commitment_hash))] if segwit_activated else []) +
-                [dict(value=amounts[script], script=script) for script in dests if amounts[script] or script == DONATION_SCRIPT] +
+                [dict(value=amounts[script], script=script) for script in dests if amounts[script] or script == global_var.get_value('donation')] +
                 [dict(value=0, script='\x6a\x28' + cls.get_ref_hash(net, share_info, ref_merkle_link) + pack.IntType(64).pack(last_txout_nonce))],
             lock_time=0,
         )
@@ -679,7 +679,7 @@ def get_user_stale_props(tracker, share_hash, lookbehind):
 def get_expected_payouts(tracker, best_share_hash, block_target, subsidy, net):
     weights, total_weight, donation_weight = tracker.get_cumulative_weights(best_share_hash, min(tracker.get_height(best_share_hash), net.REAL_CHAIN_LENGTH), 65535*net.SPREAD*bitcoin_data.target_to_average_attempts(block_target))
     res = dict((script, subsidy*weight//total_weight) for script, weight in weights.iteritems())
-    res[DONATION_SCRIPT] = res.get(DONATION_SCRIPT, 0) + subsidy - sum(res.itervalues())
+    res[global_var.get_value('donation')] = res.get(global_var.get_value('donation'), 0) + subsidy - sum(res.itervalues())
     return res
 
 def get_desired_version_counts(tracker, best_share_hash, dist):
