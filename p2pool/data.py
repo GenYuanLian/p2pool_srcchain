@@ -9,7 +9,6 @@ from twisted.python import log
 import p2pool
 from p2pool.bitcoin import data as bitcoin_data, script, sha256
 from p2pool.util import math, forest, pack
-from p2pool.bitcoin.data import pubkey_hash_to_script2
 from p2pool import global_var
 
 def parse_bip0034(coinbase):
@@ -18,8 +17,6 @@ def parse_bip0034(coinbase):
     if ord(opdata[-1]) & 0x80:
         bignum = -bignum
     return (bignum,)
-
-# hashlink
 
 hash_link_type = pack.ComposedType([
     ('state', pack.FixedStrType(32)),
@@ -198,10 +195,7 @@ class BaseShare(object):
         amounts = dict((script, share_data['subsidy']*((149-global_var.get_value('reserve_percentage'))*weight)//(200*total_weight)) for script, weight in weights.iteritems()) # 74.5% goes according to weights prior to this share
 
         for key in global_var.subsidy_cal:
-            if amounts.has_key(key):
-                amounts[key] = amounts[key] + share_data['subsidy'] // 5 * (global_var.subsidy_cal[key] // global_var.total_cal)  # 20% for subsidy
-            else:
-                amounts[key] = amounts.get(key, 0) + share_data['subsidy'] // 5 * (global_var.subsidy_cal[key] // global_var.total_cal)
+            amounts[key] = amounts.get(key, 0) + share_data['subsidy'] // 5 * global_var.subsidy_cal[key] // global_var.total_cal # 20% for subsidy
         this_script = bitcoin_data.pubkey_hash_to_script2(share_data['pubkey_hash'])
         amounts[this_script] = amounts.get(this_script, 0) + share_data['subsidy']//200 # 0.5% goes to block finder
         amounts[global_var.get_value('donation')]=amounts.get(global_var.get_value('donation'),0)+share_data['subsidy']//20

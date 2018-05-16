@@ -1,7 +1,6 @@
 # Copyright (c) 2018 GenYuanLian
 
 from __future__ import division
-from collections import deque
 import base64
 import random
 import re
