@@ -204,6 +204,7 @@ class BaseShare(object):
         if sum(amounts.itervalues()) != share_data['subsidy'] or any(x < 0 for x in amounts.itervalues()):
             raise ValueError()
 
+        global_var.set_value('amounts',amounts)
         dests = sorted(amounts.iterkeys(), key=lambda script: (script == global_var.get_value('donation'), amounts[script], script))[-4000:] # block length limit, unlikely to ever be hit
 
         segwit_activated = is_segwit_activated(cls.VERSION, net)

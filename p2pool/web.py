@@ -16,6 +16,8 @@ import p2pool
 from bitcoin import data as bitcoin_data
 from . import data as p2pool_data, p2p
 from util import deferral, deferred_resource, graph, math, memory, variable
+import global_var
+
 
 
 def _atomic_read(filename):
@@ -199,7 +201,6 @@ def get_web_root(wb, datadir_path, bitcoind_getinfo_var, stop_event=variable.Eve
             request.setHeader('Access-Control-Allow-Origin', '*')
             res = yield self.func(*self.args)
             defer.returnValue(json.dumps(res) if self.mime_type == 'application/json' else res)
-    
     def decent_height():
         return min(node.tracker.get_height(node.best_share_var.value), 720)
     web_root.putChild('rate', WebInterface(lambda: p2pool_data.get_pool_attempts_per_second(node.tracker, node.best_share_var.value, decent_height())/(1-p2pool_data.get_average_stale_prop(node.tracker, node.best_share_var.value, decent_height()))))
@@ -208,7 +209,9 @@ def get_web_root(wb, datadir_path, bitcoind_getinfo_var, stop_event=variable.Eve
     web_root.putChild('user_stales', WebInterface(lambda: dict((bitcoin_data.pubkey_hash_to_address(ph, node.net.PARENT), prop) for ph, prop in
         p2pool_data.get_user_stale_props(node.tracker, node.best_share_var.value, node.tracker.get_height(node.best_share_var.value)).iteritems())))
     web_root.putChild('fee', WebInterface(lambda: wb.worker_fee))
-    web_root.putChild('current_payouts', WebInterface(lambda: dict((bitcoin_data.script2_to_address(script, node.net.PARENT), value/1e8) for script, value in node.get_current_txouts().iteritems())))
+    a={1:2}
+
+    web_root.putChild('current_payouts', WebInterface(lambda: dict((bitcoin_data.script2_to_address(script, node.net.PARENT), value/1e8) for script, value in global_var.get_value('amounts').items())))
     web_root.putChild('patron_sendmany', WebInterface(get_patron_sendmany, 'text/plain'))
     web_root.putChild('global_stats', WebInterface(get_global_stats))
     web_root.putChild('local_stats', WebInterface(get_local_stats))
