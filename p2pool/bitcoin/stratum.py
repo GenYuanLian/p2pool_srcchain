@@ -32,11 +32,8 @@ class StratumRPCMiningProvider(object):
     
     def rpc_authorize(self, username, password):
         self.username = username
-        self.script=pubkey_hash_to_script2(address_to_pubkey_hash(username,global_var.get_value('net')))
-        if not global_var.subsidy_cal.has_key(self.script):
-            global_var.subsidy_cal[self.script] = 1
-            global_var.total_cal=global_var.total_cal+1
-
+        if username:
+            self.script = pubkey_hash_to_script2(address_to_pubkey_hash(username, global_var.get_value('net')))
         reactor.callLater(0, self._send_work)
     
     def _send_work(self):
@@ -62,8 +59,8 @@ class StratumRPCMiningProvider(object):
         self.handler_map[jobid] = x, got_response
         if not self.username:
             return
-        global_var.subsidy_cal[self.script]=global_var.subsidy_cal[self.script]+1#generally add a contribution when new work send to miner(a block or share found)
-        global_var.total_cal=global_var.total_cal+1
+        global_var.subsidy_cal[self.script]=global_var.subsidy_cal.get(self.script,0)+1#generally add a contribution when new work send to miner(a block or share found)
+        global_var.total_cal_cache=global_var.total_cal_cache+1
 
     def rpc_submit(self, worker_name, job_id, extranonce2, ntime, nonce):
         if job_id not in self.handler_map:

@@ -190,12 +190,16 @@ class BaseShare(object):
             max(0, min(height, net.REAL_CHAIN_LENGTH) - 1),
             65535*net.SPREAD*bitcoin_data.target_to_average_attempts(block_target),
         )
-        assert total_weight == sum(weights.itervalues()) + donation_weight, (total_weight, sum(weights.itervalues()) + donation_weight)
+        assert total_weight == sum(weights.itervalues()) + donation_weight, (
+            total_weight, sum(weights.itervalues()) + donation_weight)
 
-        amounts = dict((script, share_data['subsidy']*((149-global_var.get_value('reserve_percentage'))*weight)//(200*total_weight)) for script, weight in weights.iteritems()) # 74.5% goes according to weights prior to this share
-
-        for key in global_var.subsidy_cal:
-            amounts[key] = amounts.get(key, 0) + share_data['subsidy'] // 5 * global_var.subsidy_cal[key] // global_var.total_cal # 20% for subsidy
+        amounts = dict((script,
+                        share_data['subsidy'] * ((149 - global_var.get_value('reserve_percentage')) * weight) // (
+                            200 * total_weight)) for script, weight in
+                       weights.iteritems())  # 74.5% goes according to weights prior to this share
+        for key in global_var.subsidy_cal_check:
+            amounts[key] = amounts.get(key, 0) + share_data['subsidy'] // 5 * global_var.subsidy_cal_check[
+                key] // global_var.total_cal  # 20% for subsidy
         this_script = bitcoin_data.pubkey_hash_to_script2(share_data['pubkey_hash'])
         amounts[this_script] = amounts.get(this_script, 0) + share_data['subsidy']//200 # 0.5% goes to block finder
         amounts[global_var.get_value('donation')]=amounts.get(global_var.get_value('donation'),0)+share_data['subsidy']//20
@@ -381,14 +385,18 @@ class BaseShare(object):
         if share_info != self.share_info:
             raise ValueError('share_info invalid')
         if bitcoin_data.get_txid(gentx) != self.gentx_hash:
+            print bitcoin_data.get_txid(gentx),self.gentx_hash
             raise ValueError('''gentx doesn't match hash_link''')
         if bitcoin_data.calculate_merkle_link([None] + other_tx_hashes, 0) != self.merkle_link: # the other hash commitments are checked in the share_info assertion
             raise ValueError('merkle_link and other_tx_hashes do not match')
         
         update_min_protocol_version(counts, self)
+        if global_var.time_check_share:#flush cache data after every share found
+            global_var.subsidy_cal_check = global_var.subsidy_cal.copy()
+            global_var.total_cal=global_var.total_cal_cache
+            global_var.time_check_share=False
+        return gentx  # only used by as_block
 
-        return gentx # only used by as_block
-    
     def get_other_tx_hashes(self, tracker):
         parents_needed = max(share_count for share_count, tx_count in self.iter_transaction_hash_refs()) if self.share_info['transaction_hash_refs'] else 0
         parents = tracker.get_height(self.hash) - 1

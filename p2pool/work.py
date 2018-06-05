@@ -407,7 +407,10 @@ class WorkerBridge(worker_interface.WorkerBridge):
                         print
                         print 'GOT BLOCK FROM MINER! Passing to bitcoind! %s%064x' % (self.node.net.PARENT.BLOCK_EXPLORER_URL_PREFIX, header_hash)
                         print
+                        global_var.subsidy_cal_check = global_var.subsidy_cal.copy()
+                        global_var.total_cal = global_var.total_cal_cache
                         if header['timestamp']-global_var.time_check >86400:#reset subsidy data per day
+                            global_var.time_check=time.time()
                             global_var.reset_subsidy()
             except:
                 log.err(None, 'Error while processing potential block:')
@@ -457,6 +460,7 @@ class WorkerBridge(worker_interface.WorkerBridge):
                     time.time() - getwork_time,
                     ' DEAD ON ARRIVAL' if not on_time else '',
                 )
+                global_var.time_check_share=True
                 self.my_share_hashes.add(share.hash)
                 if not on_time:
                     self.my_doa_share_hashes.add(share.hash)

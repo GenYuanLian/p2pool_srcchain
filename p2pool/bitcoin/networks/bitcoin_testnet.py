@@ -28,5 +28,5 @@ ADDRESS_EXPLORER_URL_PREFIX = 'http://blockexplorer.com/testnet/address/'
 TX_EXPLORER_URL_PREFIX = 'http://blockexplorer.com/testnet/tx/'
 # SANE_TARGET_RANGE = (2**256//2**32//1000 - 1, 2**256//2**32 - 1)
 SANE_TARGET_RANGE = (2**256//2**32//1000000 - 1, 2**256//2**28 - 1)   #scchain args
-DUMB_SCRYPT_DIFF = 1
+DUMB_SCRYPT_DIFF = 0.9
 DUST_THRESHOLD = 0.001e8
