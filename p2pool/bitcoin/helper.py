@@ -7,11 +7,11 @@ import p2pool
 from p2pool.bitcoin import data as bitcoin_data
 from p2pool.util import deferral, jsonrpc
 
-@deferral.retry('Error while checking Bitcoin connection:', 1)
+@deferral.retry('Error while checking Srcchain connection:', 1)
 @defer.inlineCallbacks
 def check(bitcoind, net):
     if not (yield net.PARENT.RPC_CHECK(bitcoind)):
-        print >>sys.stderr, "    Check failed! Make sure that you're connected to the right bitcoind with --bitcoind-rpc-port!"
+        print >>sys.stderr, "    Check failed! Make sure that you're connected to the right srcchaind with --srcchaind-rpc-port!"
         raise deferral.RetrySilentlyException()
     
     # version_check_result = net.VERSION_CHECK((yield bitcoind.rpc_getnetworkinfo())['version'])
@@ -34,7 +34,7 @@ def check(bitcoind, net):
     #     print 'Coin daemon too old! Upgrade!'
     #     raise deferral.RetrySilentlyException()
 
-@deferral.retry('Error getting work from bitcoind:', 3)
+@deferral.retry('Error getting work from srcchaind:', 3)
 @defer.inlineCallbacks
 def getwork(bitcoind, use_getblocktemplate=False):
     def go():
@@ -53,7 +53,7 @@ def getwork(bitcoind, use_getblocktemplate=False):
             work = yield go()
             end = time.time()
         except jsonrpc.Error_for_code(-32601): # Method not found
-            print >>sys.stderr, 'Error: Bitcoin version too old! Upgrade to v0.5 or newer!'
+            print >>sys.stderr, 'Error: Srcchain version too old! Upgrade to v0.5 or newer!'
             raise deferral.RetrySilentlyException()
 
     work['transactions'] = [x for x in work['transactions'] if x['txid'] == x['hash']] # don't mine segwit txs for now

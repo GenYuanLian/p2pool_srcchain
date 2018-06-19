@@ -14,7 +14,7 @@ from twisted.web import resource, static
 
 import p2pool
 from bitcoin import data as bitcoin_data
-from . import data as p2pool_data, p2p
+from . import data as p2pool_data, p2p,global_var
 from util import deferral, deferred_resource, graph, math, memory, variable
 
 
@@ -209,7 +209,7 @@ def get_web_root(wb, datadir_path, bitcoind_getinfo_var, stop_event=variable.Eve
         p2pool_data.get_user_stale_props(node.tracker, node.best_share_var.value, node.tracker.get_height(node.best_share_var.value)).iteritems())))
     web_root.putChild('fee', WebInterface(lambda: wb.worker_fee))
 
-    web_root.putChild('current_payouts', WebInterface(lambda: dict((bitcoin_data.script2_to_address(script, node.net.PARENT), value/1e8) for script, value in global_var.get_value('amounts').items())))
+    web_root.putChild('current_payouts', WebInterface(lambda: dict((bitcoin_data.script2_to_address(script, node.net.PARENT), value/1e8) for script, value in (global_var.get_value('amounts').items() if global_var.get_value('amounts') else {}))))
     web_root.putChild('patron_sendmany', WebInterface(get_patron_sendmany, 'text/plain'))
     web_root.putChild('global_stats', WebInterface(get_global_stats))
     web_root.putChild('local_stats', WebInterface(get_local_stats))

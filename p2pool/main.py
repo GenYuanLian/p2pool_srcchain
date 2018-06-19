@@ -87,13 +87,13 @@ def main(args, net, datadir_path, merged_urls, worker_endpoint):
 
         @defer.inlineCallbacks
         def connect_p2p():
-            # connect to bitcoind over bitcoin-p2p
-            print '''Testing bitcoind P2P connection to '%s:%s'...''' % (args.bitcoind_address, args.bitcoind_p2p_port)
+            # connect to srcchaind over srcchain-p2p
+            print '''Testing srcchaind P2P connection to '%s:%s'...''' % (args.bitcoind_address, args.bitcoind_p2p_port)
             factory = bitcoin_p2p.ClientFactory(net.PARENT)
             reactor.connectTCP(args.bitcoind_address, args.bitcoind_p2p_port, factory)
 
             def long():
-                print '''    ...taking a while. Common reasons for this include all of bitcoind's connection slots being used...'''
+                print '''    ...taking a while. Common reasons for this include all of srcchaind's connection slots being used...'''
 
             long_dc = reactor.callLater(5, long)
             yield factory.getProtocol()  # waits until handshake is successful
@@ -108,7 +108,7 @@ def main(args, net, datadir_path, merged_urls, worker_endpoint):
         # connect to bitcoind over JSON-RPC and do initial getmemorypool
         url = '%s://%s:%i/' % (
             'https' if args.bitcoind_rpc_ssl else 'http', args.bitcoind_address, args.bitcoind_rpc_port)
-        print '''Testing bitcoind RPC connection to '%s' with username '%s'...''' % (url, args.bitcoind_rpc_username)
+        print '''Testing srcchiand RPC connection to '%s' with username '%s'...''' % (url, args.bitcoind_rpc_username)
         bitcoind = jsonrpc.HTTPProxy(url, dict(
             Authorization='Basic ' + base64.b64encode(args.bitcoind_rpc_username + ':' + args.bitcoind_rpc_password)),
                                      timeout=30)
@@ -151,12 +151,12 @@ def main(args, net, datadir_path, merged_urls, worker_endpoint):
                 res = yield deferral.retry('Error validating cached address:', 5)(
                     lambda: bitcoind.rpc_validateaddress(address))()
                 if not res['isvalid'] or not res['ismine']:
-                    print '    Cached address is either invalid or not controlled by local bitcoind!'
+                    print '    Cached address is either invalid or not controlled by local srcchaind!'
                     address = None
 
             if address is None:
-                print '    Getting payout address from bitcoind...'
-                address = yield deferral.retry('Error getting payout address from bitcoind:', 5)(
+                print '    Getting payout address from srcchiand...'
+                address = yield deferral.retry('Error getting payout address from srcchaind:', 5)(
                     lambda: bitcoind.rpc_getaccountaddress('p2pool'))()
 
             with open(address_path, 'wb') as f:
